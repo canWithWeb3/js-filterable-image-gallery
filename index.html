@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  </head>
+  <body>
+   
+    <div class="container my-5">
+        <div class="btns d-flex flex-wrap gap-3">
+            <button data-group="all" class="btn btn-outline-primary active">All</button>
+            <button data-group="cloth" class="btn btn-outline-primary">Cloth</button>
+            <button data-group="phone" class="btn btn-outline-primary">Phone</button>
+            <button data-group="shoe" class="btn btn-outline-primary">Shoe</button>
+        </div>
+
+        <div class="row my-5">
+
+        </div>
+    </div>
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        $(function(){
+            let data = [
+                { image: "images/cloth-1.jpg", title: 'cloth-1', group: 'cloth' },
+                { image: "images/phone-1.jpg", title: 'phone-1', group: 'phone' },
+                { image: "images/cloth-2.jpg", title: 'cloth-2', group: 'cloth' },
+                { image: "images/shoe-1.jpg", title: 'shoe-1', group: 'shoe' },
+                { image: "images/cloth-3.jpg", title: 'cloth-3', group: 'cloth' },
+                { image: "images/phone-2.jpg", title: 'phone-2', group: 'phone' },
+                { image: "images/shoe-2.jpg", title: 'shoe-2', group: 'shoe' },
+            ]
+
+            data.forEach(item => {
+                let html = `
+                    <div data-group="${item.group}" class="products col-md-3 mb-3">
+                        <div class="card">
+                            <img style="height:200px; object-fit: cover;" src="${item.image}" alt="" class="card-img-top">
+                            <div class="card-body">
+                                <h5 class="card-title">${item.title}</h5>
+                            </div>
+                        </div>
+                    </div>
+                `
+
+                $('.row').append(html)
+            })
+
+            $('.btns .btn').on('click', function(){
+                $('.btns .btn').removeClass('active')
+                $(this).addClass('active')
+
+                const selectedGroup = $(this).data('group')
+                $('.products').each(function(){
+                    const group = $(this).data('group')
+                    if(selectedGroup == "all"){
+                        $(this).show(500)
+                    }else{
+                        if(selectedGroup == group){
+                            $(this).show(500)
+                        }else{
+                            $(this).hide(500)
+                        }
+                    }
+
+                })
+            })
+
+        })
+    </script>
+  </body>
+</html>
